@@ -1,0 +1,260 @@
+"------------------------
+" PLUG - plugin installer
+"------------------------
+
+if has('nvim')
+  let vim_base_dir = "$HOME/.config/nvim/"
+else
+  let vim_base_dir = "$HOME/.vim/"
+endif
+
+let autoload_plug = vim_base_dir."autoload/plug.vim"
+
+if empty(glob(autoload_plug))
+    silent execute '!curl -fLo ' . autoload_plug . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+let plugin_dir = vim_base_dir."plugged"
+call plug#begin(plugin_dir)
+
+filetype plugin indent on " Attempts to determine file type based on name and content
+
+"""""""""""""""""""
+" GENERAL OPTIONS "
+"""""""""""""""""""
+set mouse=a " Allows you to click around the text editor with your mouse to move the cursor
+
+if !has('nvim')
+  set ttymouse=xterm2 " Allows you to click around the text editor with your mouse to move the cursor
+else
+  set guicursor= " disable different cursors for different modes
+  :tnoremap <C-c> <C-\><C-n>
+endif
+
+set showcmd " Show partial commands in last line of screen
+set showmatch " Highlights matching brackets in programming languages
+set number " Enables line numbering
+set relativenumber " Relative numbering of lines in normal mode
+set backspace=indent,eol,start " This makes the backspace key function like it does in other programs
+set nowrap " Display long lines as just one line
+set list listchars=tab:>·,trail:·,nbsp:· " Prints tabs and trailing spaces
+set encoding=utf8 " Character encoding
+set cc=101 " Show 100 characters limit
+set wildmenu " Shows list of completions of commands
+set updatetime=1000 " updates every second instead of every 4 (default)
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+""""""""""""""""""
+" SEARCH OPTIONS "
+""""""""""""""""""
+set hlsearch " Highlights searches
+set ignorecase " Use case insensitive search...
+set smartcase " ...except when using capital letters
+set incsearch " Show search matches as you type
+autocmd FileType c,cpp,tex,bib,sh set noignorecase "For those files deactivate ignorecase
+
+"""""""""""""""""""""""
+" INDENTATION OPTIONS "
+"""""""""""""""""""""""
+set autoindent
+autocmd FileType c,cpp set shiftwidth=2 " Number of spaces for autoindent
+autocmd FileType java,python,yaml set shiftwidth=4 " Number of spaces for autoindent
+set shiftround " Uses number in shiftwidth to indent with > or <
+set copyindent " Copy the previous indentation
+set smartindent " Automatically indents lines after opening a bracket in programming languages
+
+"""""""""""""""
+" TAB OPTIONS "
+"""""""""""""""
+set tabstop=4 " How much space Vim gives to a tab
+set expandtab " Converts tabs to spaces
+set smarttab " Insert tabs at start of line according to shiftwidth not tabstop
+
+"""""""""""""""""
+" SPELL CHECKER "
+"""""""""""""""""
+autocmd FileType tex set spell spelllang=en_gb
+
+""""""""""""""""""""""""""""""
+" REMOVE TRAILING WHITESPACE "
+""""""""""""""""""""""""""""""
+nnoremap <F9>  BufWritePre <buffer> %s/\s\+$//e<CR>
+"-------------------------------
+" SUBLIME COLOUR THEME - MONOKAI
+"-------------------------------
+
+let colors_dir = vim_base_dir."colors"
+Plug 'crusoexia/vim-monokai', { 'do': 'cp -r $HOME/.vim/plugged/vim-monokai/colors/* ' . colors_dir}
+Plug 'altercation/vim-colors-solarized', { 'do': 'cp -r $HOME/.vim/plugged/vim-colors-solarized/colors/* ' . colors_dir }
+let g:solarized_termcolors=256
+
+syntax on " Enables syntax highlighting for programming languages
+colorscheme monokai" Colour scheme
+
+"----------------------------------------
+" Commentary - Comment function plugin
+"----------------------------------------
+Plug 'tpope/vim-commentary'
+
+"-----------------------------------------------------------
+" Git-Gutter - Shows which line changed with respect to HEAD
+"-----------------------------------------------------------
+Plug 'airblade/vim-gitgutter'
+
+"---------------------------------------
+" Vim-Airline - Status bar customization
+"---------------------------------------
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'powerline/fonts'
+
+let g:airline_theme='violet'
+
+" use powerline fonts
+let g:airline_powerline_fonts = 1
+
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+"-------------------------------
+" VIM-FUGITIVE - Git Integration
+"-------------------------------
+Plug 'tpope/vim-fugitive'
+" toggle git blame
+nnoremap <F2> :Gblame<CR>
+" git grep and insert word
+nnoremap <F3> :Ggrep 
+" git grep word under cursor
+nnoremap <F11> :Ggrep <cword> <CR>
+
+"--------------------------------
+" VIM-QF - Improved quickfix list
+"--------------------------------
+Plug 'romainl/vim-qf'
+
+nmap cn <Plug>(qf_qf_next)
+nmap cp <Plug>(qf_qf_previous)
+
+"---------------------------------------
+" VIM-FSWITCH - SWAP BETWEEN .h AND .cpp
+"---------------------------------------
+Plug 'derekwyatt/vim-fswitch'
+nnoremap <F5> :FSHere<CR>
+
+"---------------------------------------
+" NERDTree - File system explorer plugin
+"---------------------------------------
+Plug 'scrooloose/nerdtree'
+
+" CTRL-n opens file system explorer NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Closes window if NERDTree is last remained open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"------------------------------
+" IMPROVED C++ SYNTAX HIGHLIGHT
+"------------------------------
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+
+"-------------------------------
+" ALE - ASYNCHRONOUS LINT ENGINE
+"-------------------------------
+
+Plug 'w0rp/ale'
+
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_linters = {'cpp': ['clangtidy'],}
+
+let g:ale_cpp_clangtidy_executable = '/users/clio2/antonello/bin/lp-clang-tidy'
+let g:ale_completion_enabled = 0
+let g:ale_lint_on_enter = 1
+let g:ale_echo_cursor = 1
+
+"------------------------------
+" TAGBAR - CLASS OUTLINE VIEWER
+"------------------------------
+Plug 'majutsushi/tagbar'
+nnoremap <F8> :TagbarToggle<CR>
+
+"-------------------
+" FZF - FUZZY FINDER
+"-------------------
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf.git', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+nnoremap <C-p>
+    \ :GFiles<CR>
+
+nnoremap <F12>
+    \ :call fzf#vim#gitfiles('.', {'options':'--query '.expand('<cword>')})<CR>
+
+nnoremap <F4>
+   \ :call fzf#vim#grep(
+   \ 'git grep --line-number '.shellescape(expand('<cword>')),
+   \ 0, 0)<CR>
+
+
+"-----------------
+" VIM SEARCH PULSE
+"-----------------
+Plug 'inside/vim-search-pulse'
+
+"--------------
+" YouCompleteMe
+"--------------
+
+Plug 'Valloric/YouCompleteMe'
+let g:ycm_use_clangd = "Never"
+let g:ycm_global_ycm_extra_conf = "$HOME/.ycm_extra_conf.py"
+"let g:ycm_log_level = 'debug'
+
+"-------------
+" VIM MARKDOWN
+"-------------
+
+Plug 'gabrielelana/vim-markdown'
+let g:markdown_enable_spell_checking = 0
+
+"---------
+" SURROUND
+"---------
+
+Plug 'tpope/vim-surround'
+"-----------------------------
+" PLUG end hook - Must be last
+"-----------------------------
+call plug#end()
