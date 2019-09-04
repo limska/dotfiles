@@ -1,0 +1,8 @@
+new -s build -n git /usr/bin/zsh
+neww -n vim -c ~/src/starccm/dev/star
+neww -n cmake -c ~/src/starccm/dev/star
+neww -n java -c ~/src/starccm/dev/star
+neww -n python -c ~/src/starccm/dev/star
+neww -n rsync -c ~/src/starccm/dev/star
+selectw -t 1
+
