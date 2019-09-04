@@ -17,7 +17,8 @@ set mouse=a " Allows clicking with the mouse to move the cursor
 set ttymouse=sgr " Needed for mouse to work in Windows terminal
 set showcmd " Show partial commands in last line of screen
 set nowrap " Display long lines as just one line
-set list listchars=tab:→\ ,nbsp:•,trail:•
+"set list listchars=tab:→\ ,nbsp:•,trail:•
+set list listchars=tab:>\ 
 set encoding=utf8
 set nobackup " Do not create ~ files
 set backupcopy=yes
@@ -29,6 +30,18 @@ colorscheme koehler
 
 nnoremap )) :set number!<CR>
 nnoremap MM <esc>:make<cr>
+nnoremap <F9> :call ShowTabToggle()<cr>
+
+function! ShowTabToggle()
+  if &list
+    set nolist
+    set tabstop=4
+  else
+    "set list listchars=tab:→\ ,nbsp:•,trail:•
+    set list listchars=tab:>\ 
+    set tabstop=2
+  endif
+endfunction
 
 "==============================================================================
 " SEARCH SETTINGS
@@ -113,6 +126,73 @@ Plug 'scrooloose/nerdcommenter' " Commenting maps
 Plug 'Valloric/vim-operator-highlight' " Operator syntax highlighting
 Plug 'bfrg/vim-cpp-modern' " Improved C++ highlighting
 Plug 'breuckelen/vim-resize' " Resize pane maps
+
+"==============================================================================
+" YouCompleteMe
+"==============================================================================
+Plug 'valloric/youcompleteme'
+let g:ycm_global_ycm_extra_conf = "/u/cd8rit/src/starccm/dev/.ycm_extra_conf.py"
+
+"---------------------------------------
+" NERDTree - File system explorer plugin
+"---------------------------------------
+Plug 'scrooloose/nerdtree'
+
+" CTRL-n opens file system explorer NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Closes window if NERDTree is last remained open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"------------------------------
+" IMPROVED C++ SYNTAX HIGHLIGHT
+"------------------------------
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+
+"---------------------------------------
+" Vim-Airline - Status bar customization
+"---------------------------------------
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'powerline/fonts'
+
+let g:airline_theme='violet'
+
+" use powerline fonts
+let g:airline_powerline_fonts = 1
+
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
 
 "==============================================================================
 " PLUG END HOOK (MUST BE LAST)
