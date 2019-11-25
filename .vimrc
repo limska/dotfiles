@@ -133,6 +133,9 @@ Plug 'breuckelen/vim-resize' " Resize pane maps
 Plug 'valloric/youcompleteme'
 let g:ycm_global_ycm_extra_conf = "/u/cd8rit/src/starccm/dev/.ycm_extra_conf.py"
 
+" Apply YCM FixIt
+map <F8> :YcmCompleter FixIt<CR>
+
 "---------------------------------------
 " NERDTree - File system explorer plugin
 "---------------------------------------
