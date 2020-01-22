@@ -114,7 +114,7 @@ alias ls="ls --color=auto"
 alias l="ls -alh"
 alias rcp="cp -rv"
 alias rrm="rm -rf"
-alias grep="grep -iEn --color=auto"
+#alias grep="grep -iEn --color=auto"
 alias ff="find | grep"
 
 #==============================================================================
