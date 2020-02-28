@@ -49,10 +49,10 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=$HOME/.zsh_history
-setopt hist_ignore_all_dups
-setopt hist_reduce_blanks
-setopt appendhistory
-setopt share_history
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
@@ -69,7 +69,7 @@ bindkey "\e[3~" delete-char
 #==============================================================================
 # FZF
 #==============================================================================
-export FZF_HOME="$HOME/.fzf.git/"
+export FZF_HOME="$HOME/.fzf.git"
 export PATH="$FZF_HOME/bin:$PATH"
 source "$FZF_HOME/shell/completion.zsh"
 source "$FZF_HOME/shell/key-bindings.zsh"
