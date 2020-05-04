@@ -135,7 +135,6 @@ Plug 'breuckelen/vim-resize' " Resize pane maps
 
 " Apply YCM FixIt
 "map <F8> :YcmCompleter FixIt<CR>
-=======
 
 "---------------------------------------
 " NERDTree - File system explorer plugin
