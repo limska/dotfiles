@@ -1,13 +1,13 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */u/cd8rit/.fzf.git/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/u/cd8rit/.fzf.git/bin"
+if [[ ! "$PATH" == *$HOME/.fzf.git/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.fzf.git/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/u/cd8rit/.fzf.git/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$HOME/.fzf.git/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/u/cd8rit/.fzf.git/shell/key-bindings.zsh"
+source "$HOME/.fzf.git/shell/key-bindings.zsh"
