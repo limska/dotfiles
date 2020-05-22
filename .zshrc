@@ -1,5 +1,7 @@
 #! /bin/zsh
 
+umask 022
+
 #==============================================================================
 # PROMPT/TITLEBAR/COLORS/MISC
 #==============================================================================
@@ -54,7 +56,9 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 bindkey '\e[A' history-beginning-search-backward
+bindkey 'OA' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+bindkey 'OB' history-beginning-search-forward
 
 #==============================================================================
 # STANDARD KEYS BEHAVIOUR
