@@ -25,6 +25,7 @@ set backupcopy=yes
 set backspace=indent,eol,start " Make backspace behave correctly
 set number
 set laststatus=2
+set clipboard=unnamedplus
 
 colorscheme koehler
 
