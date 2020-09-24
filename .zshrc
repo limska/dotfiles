@@ -73,7 +73,7 @@ bindkey "\e[3~" delete-char
 #==============================================================================
 # FZF
 #==============================================================================
-export FZF_HOME="$HOME/.fzf.git"
+export FZF_HOME="$HOME/.fzf"
 export PATH="$FZF_HOME/bin:$PATH"
 source "$FZF_HOME/shell/completion.zsh"
 source "$FZF_HOME/shell/key-bindings.zsh"
