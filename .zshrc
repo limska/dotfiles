@@ -82,33 +82,33 @@ source "$FZF_HOME/shell/key-bindings.zsh"
 # FASD
 #==============================================================================
 # Enable everything but zsh-hook
-eval "$(fasd --init posix-alias)"
-
-_fasd_preexec() {
-    { eval "fasd --proc \$(fasd --sanitize \$2)"; } &|
-}
-
-autoload -Uz add-zsh-hook
-add-zsh-hook preexec _fasd_preexec
-
-cd ()
-{
-    if [[ $# -eq 0 \
-       || -e "$@" \
-       || $@ == "-" ]]; then
-        builtin cd "$@"
-    else
-        local dir
-        dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && \
-        cd "${dir}"
-    fi
-}
-
-v() {
-    local file
-    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && \
-    $EDITOR "${file}" || return 1
-}
+#eval "$(fasd --init posix-alias)"
+#
+#_fasd_preexec() {
+#    { eval "fasd --proc \$(fasd --sanitize \$2)"; } &|
+#}
+#
+#autoload -Uz add-zsh-hook
+#add-zsh-hook preexec _fasd_preexec
+#
+#cd ()
+#{
+#    if [[ $# -eq 0 \
+#       || -e "$@" \
+#       || $@ == "-" ]]; then
+#        builtin cd "$@"
+#    else
+#        local dir
+#        dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && \
+#        cd "${dir}"
+#    fi
+#}
+#
+#v() {
+#    local file
+#    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && \
+#    $EDITOR "${file}" || return 1
+#}
 
 #==============================================================================
 # COREUTILS ALIASES
