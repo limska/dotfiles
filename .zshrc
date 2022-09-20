@@ -71,14 +71,6 @@ bindkey "\e[2~" quoted-insert
 bindkey "\e[3~" delete-char
 
 #==============================================================================
-# FZF
-#==============================================================================
-export FZF_HOME="$HOME/.fzf"
-export PATH="$FZF_HOME/bin:$PATH"
-source "$FZF_HOME/shell/completion.zsh"
-source "$FZF_HOME/shell/key-bindings.zsh"
-
-#==============================================================================
 # FASD
 #==============================================================================
 # Enable everything but zsh-hook
@@ -157,3 +149,7 @@ alias vd="vimdiff"
 #==============================================================================
 eval "$(direnv hook zsh)"
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
