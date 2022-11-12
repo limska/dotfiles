@@ -1,9 +1,4 @@
-#! /bin/zsh
-
 umask 022
-
-source $HOME/dotfiles/.zshrc.ohmyzsh
-
 
 #==============================================================================
 # PROMPT/TITLEBAR/COLORS/MISC
@@ -66,12 +61,12 @@ bindkey 'OB' history-beginning-search-forward
 #==============================================================================
 # STANDARD KEYS BEHAVIOUR
 #==============================================================================
-bindkey "\e[H" beginning-of-line
-bindkey "\e[F" end-of-line
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[4~" end-of-line
-bindkey "\e[2~" quoted-insert
-bindkey "\e[3~" delete-char
+#bindkey "\e[H" beginning-of-line
+#bindkey "\e[F" end-of-line
+#bindkey "\e[1~" beginning-of-line
+#bindkey "\e[4~" end-of-line
+#bindkey "\e[2~" quoted-insert
+#bindkey "\e[3~" delete-char
 
 #==============================================================================
 # FASD
@@ -152,7 +147,17 @@ alias vd="vimdiff"
 #==============================================================================
 eval "$(direnv hook zsh)"
 
+#==============================================================================
+# Oh my zsh
+#==============================================================================
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="avit"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
 
+#==============================================================================
+# nvm
+#==============================================================================
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
