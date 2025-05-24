@@ -151,9 +151,12 @@ eval "$(direnv hook zsh)"
 # Oh my zsh
 #==============================================================================
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="avit"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 #==============================================================================
 # nvm
@@ -162,5 +165,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-fpath+=${ZDOTDIR:-~}/.zsh_functions
