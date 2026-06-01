@@ -19,7 +19,7 @@ export LESS_TERMCAP_md=$'\e[1;31m'
 export LESS_TERMCAP_me=$'\e[0m'
 
 # editor (needed for git diff etc.)
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # quiet
 setopt no_beep
@@ -138,7 +138,7 @@ alias -g ¬G="grep"
 #==============================================================================
 # APPLICATION ALIASES/FUNCTIONS
 #==============================================================================
-alias vi="vim -O"
+alias vi="nvim -O"
 alias vd="vimdiff"
 
 
@@ -150,13 +150,14 @@ eval "$(direnv hook zsh)"
 #==============================================================================
 # Oh my zsh
 #==============================================================================
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+#export ZSH="$HOME/.oh-my-zsh"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+#plugins=(git)
+#source $ZSH/oh-my-zsh.sh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+#fpath+=${ZDOTDIR:-~}/.zsh_functions
+eval "$(starship init zsh)"
 
 #==============================================================================
 # nvm
@@ -165,3 +166,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# pnpm
+export PNPM_HOME="/home/sava/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
